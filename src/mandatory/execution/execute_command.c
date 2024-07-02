@@ -6,7 +6,7 @@
 /*   By: mavitori <mavitori@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:39:09 by mavitori          #+#    #+#             */
-/*   Updated: 2024/07/02 14:59:59 by mavitori         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:02:16 by mavitori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static int	try_path(char **cmd_args, char **path_args, char **args, int *index)
 	char	*path;
 	int		status;
 
-	if (*index == 0)
-		path = ft_strdup(cmd_args[(*index)++]);
+	if (*index == -1)
+		path = ft_strdup(cmd_args[++(*index)]);
 	else
 		path = build_path(path_args, index, cmd_args);
 	status = access(path, F_OK | X_OK);
@@ -88,9 +88,9 @@ static void	start_execution(char **cmd_args, char **path_args, int *status,
 	int		index;
 	char	**args;
 
-	index = 0;
+	index = -1;
 	args = build_var_args(envp);
-	while (path_args[index])
+	while (index == -1 || path_args[index])
 	{
 		*status = try_path(cmd_args, path_args, args, &index);
 		if (*status == KO || *status == 127)

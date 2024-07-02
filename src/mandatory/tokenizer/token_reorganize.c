@@ -6,7 +6,7 @@
 /*   By: mavitori <mavitori@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 18:35:50 by mavitori          #+#    #+#             */
-/*   Updated: 2024/06/04 18:42:03 by mavitori         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:50:54 by mavitori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,25 @@ t_token	*reorganize_redirect_tokens(t_token *root)
 	if (in_order == FALSE)
 		fix_redirect_order(current->prev);
 	return (root);
+}
+
+int	parse_token_constructor(char *cmd_line, int *size, int has_quote)
+{
+	int	i;
+
+	i = *size;
+	if (ft_isspace(cmd_line[i]) == 0)
+	{
+		if (cmd_line[i] == '>' || cmd_line[i] == '<' || (cmd_line[i] == '>'
+				&& cmd_line[i + 1] == '>')
+			|| (cmd_line[i] == '<' && cmd_line[i + 1] == '<'))
+			return (-1);
+		else
+			(*size)++;
+	}
+	else if (ft_isspace(cmd_line[i]) == 1 && has_quote == TRUE)
+		(*size)++;
+	else
+		i = -1;
+	return (i);
 }

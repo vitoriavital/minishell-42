@@ -1,0 +1,10 @@
+includes
+libs
+Makefile
+minishell
+objs
+out.txt
+README.md
+src
+oi
+oi

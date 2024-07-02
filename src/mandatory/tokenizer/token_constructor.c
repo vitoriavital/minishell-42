@@ -6,7 +6,7 @@
 /*   By: mavitori <mavitori@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 14:22:57 by mavitori          #+#    #+#             */
-/*   Updated: 2024/06/06 15:14:34 by andrefil         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:01:29 by mavitori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ static t_token	*build_word_token(int *i, char *cmd_line)
 		if (cmd_line[size] == '\'' || cmd_line[size] == '\"')
 		{
 			size++;
-			has_quote = !has_quote;
+			if (has_quote == FALSE)
+				has_quote = !has_quote;
+			else
+				break ;
 		}
-		else if (ft_isspace(cmd_line[size]) == 0)
-			size++;
-		else if (ft_isspace(cmd_line[size]) == 1 && has_quote == TRUE)
-			size++;
-		else
+		else if (parse_token_constructor(cmd_line, &size, has_quote) == -1)
 			break ;
 		if (cmd_line[size] == '|' && ft_isspace(cmd_line[--size]) == 0)
 			break ;
@@ -77,7 +76,8 @@ static t_token	*build_quote_token(int *i, char *cmd_line)
 		return (NULL);
 	else
 		size++;
-	create_quote_token(cmd_line, &size);
+	if (cmd_line[size] != '<' && cmd_line[size] != '>')
+		create_quote_token(cmd_line, &size);
 	token = token_lstnew(ft_strndup(&cmd_line[*i], size - *i), WORD);
 	*i = size - 1;
 	return (token);

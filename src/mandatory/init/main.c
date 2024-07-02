@@ -6,7 +6,7 @@
 /*   By: mavitori <mavitori@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:18:31 by andrefil          #+#    #+#             */
-/*   Updated: 2024/06/07 16:00:47 by mavitori         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:03:19 by mavitori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	validate_input(char *input)
 	if (!input)
 	{
 		printf("exit\n");
-		return (END);
+		exit (0);
 	}
 	if (!ft_strncmp(input, "", 1))
 	{
@@ -80,6 +80,7 @@ static int	get_input(t_env_var **envp, int status)
 	char		*in_user;
 	int			valid;
 
+	g_signal = 0;
 	in_user = ft_user_in_prompt(envp, "USER");
 	term_properties(0);
 	input = readline(in_user);
@@ -108,16 +109,16 @@ int	main(void)
 	get_envp(&envp, __environ);
 	while (1)
 	{
-		g_signal = 0;
 		status = get_input(&envp, status);
 		if (status == 131)
 			printf("Quit (core dumped)\n");
 		else if ((status == 2 || status == 0) && g_signal == SIGINT)
+		{
 			printf("\n");
+			status = 130;
+		}
 		if (status == 131 || (status == 2 && g_signal == SIGINT))
 			term_properties(1);
-		if (status == END)
-			break ;
 	}
 	close (STDIN_FILENO);
 	close (STDOUT_FILENO);

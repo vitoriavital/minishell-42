@@ -6,7 +6,7 @@
 /*   By: mavitori <mavitori@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:02:26 by andrefil          #+#    #+#             */
-/*   Updated: 2024/06/07 15:41:21 by mavitori         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:30:31 by mavitori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,27 @@ static int	echo_env(char *content, t_data *data)
 	return (status);
 }
 
+static int	check_multi_n(char *str)
+{
+	int	i;
+
+	if (str[0] != '-')
+		return (1);
+	i = 1;
+	while (str[i] == 'n')
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	return (1);
+}
+
 int	ft_echo(char **arg, t_data *data)
 {
 	int	index;
 
 	if (ft_strncmp(arg[0], "echo", 5) == 0 && arg[1] != NULL)
 	{
-		if (ft_strncmp(arg[1], "-n", 3) == 0)
+		if (check_multi_n(arg[1]) == 0)
 			index = 2;
 		else
 			index = 1;
@@ -41,7 +55,7 @@ int	ft_echo(char **arg, t_data *data)
 		{
 			if (ft_strncmp(arg[index], "\"\"", 3) == 0)
 				index++;
-			else
+			else if (arg[index] != NULL)
 				ft_putstr_fd(arg[index++], 1);
 			if (arg[index] != NULL)
 				ft_putchar_fd(' ', 1);

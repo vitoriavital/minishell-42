@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dir.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrefil <andrefil@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mavitori <mavitori@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 22:20:45 by andrefil          #+#    #+#             */
-/*   Updated: 2024/06/02 23:50:01 by andrefil         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:29:42 by mavitori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	call_pwd(char *input)
 	if (ft_strncmp(input, "pwd", 4))
 		return (0);
 	pwd = getcwd(NULL, 0);
+	if (!pwd)
+	{
+		perror("pwd");
+		return (1);
+	}
 	ft_putendl_fd(pwd, 1);
 	free(pwd);
 	return (1);

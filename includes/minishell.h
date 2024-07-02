@@ -6,7 +6,7 @@
 /*   By: mavitori <mavitori@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:00:35 by andrefil          #+#    #+#             */
-/*   Updated: 2024/06/07 18:24:17 by mavitori         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:46:48 by mavitori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,8 @@ t_token						*upgrade_env_var(t_token *token, t_env_var **envp,
 
 /*----- TOKEN-REORGANIZE: -----*/
 t_token						*reorganize_redirect_tokens(t_token *root);
+int							parse_token_constructor(char *cmd_line, int *size,
+								int has_quote);
 
 /*----- ENV-TOKEN-UPGRADE: -----*/
 void						search_env_key(char *env_key,
