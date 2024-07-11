@@ -1,5 +1,10 @@
 # Minishell
 
+<p align="center">
+  <img src="https://github.com/ayogun/42-project-badges/raw/main/badges/minishelle.png" alt="Minishell Achievement" width="200" height="200">
+  <img src="https://res.cloudinary.com/dfjub9qt4/image/upload/v1712254907/push_swap_42545.png" alt="Minishell Square" width="200" height="200">
+</p>
+
 Minishell is a simplified Unix shell implementation written in C, designed to mimic basic functionalities of popular Unix shells like Bash.
 
 ## Introduction
@@ -112,3 +117,11 @@ env
 ```bash
 exit
 ```
+
+## Contributors
+
+Minishell was created and developed by:
+
+- [Vitória Vital](https://github.com/vitoriavital)
+- [André Campos](https://github.com/Andrefcampos)
+
